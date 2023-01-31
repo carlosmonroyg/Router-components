@@ -1,12 +1,16 @@
 <template>
+  <Nadvar/>
   <img alt="Vue logo" src="./assets/logo.png" />
   <router-view />
 </template>
 
 <script>
+import Nadvar from "@/shared/components/Nadvar";
 export default {
   name: "App",
-  components: {},
+  components: {
+    Nadvar
+  },
 };
 </script>
 

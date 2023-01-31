@@ -1,15 +1,17 @@
-import * as Vue from 'vue';
-import * as VueRouter from 'vue-router';
-import AboutPages from "@/Pokemon/pages/AboutPages";
-import ListPages from "@/Pokemon/pages/ListPages";
-import PokemonPages from "@/Pokemon/pages/PokemonPages";
-import NoPagesFound from "@/shared/components/page/NoPagesFound";
+import * as Vue from "vue";
+import * as VueRouter from "vue-router";
 
 const routes = [
-  { path: '/', component: ListPages },
-  { path: '/about', component: AboutPages },
-  { path: '/id', component: PokemonPages },
-  { path: '/:pathMatch(.*)*', component: NoPageFound },
+  { path: "/", component: () => import(/*WebPack*/"@/Pokemon/pages/ListPages") },
+
+  { path: "/about", component: () => import(/*WebPack*/"@/Pokemon/pages/AboutPages") },
+
+  { path: "/id", component: () => import(/*WebPack*/"@/Pokemon/pages/PokemonPages") },
+
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import(/*WebPack*/"@/shared/components/NoPagesFound"),
+  },
 ];
 
 const router = VueRouter.createRouter({
@@ -17,4 +19,4 @@ const router = VueRouter.createRouter({
   routes,
 });
 
-export default router
+export default router;
