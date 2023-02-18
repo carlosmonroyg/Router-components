@@ -2,15 +2,41 @@ import * as Vue from "vue";
 import * as VueRouter from "vue-router";
 
 const routes = [
-  { path: "/", component: () => import(/*WebPack*/"@/Pokemon/pages/ListPages") },
+  {
+    path: "/",
+    redirect: "/home",
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: () => import(/*WebPack*/ "@/Pokemon/pages/ListPages"),
+  },
+  {
+    path: "/counter",
+    name: "counter",
+    component: () => import(/*WebPack*/ "@/Pokemon/pages/Counter"),
+  },
 
-  { path: "/about", component: () => import(/*WebPack*/"@/Pokemon/pages/AboutPages") },
+  {
+    path: "/about",
+    name:"about",
+    component: () => import(/*WebPack*/ "@/Pokemon/pages/AboutPages"),
+  },
 
-  { path: "/id", component: () => import(/*WebPack*/"@/Pokemon/pages/PokemonPages") },
+  {
+    path: "/pokemonid/:id",
+    name: "pokemon-id",
+    component: () => import(/*WebPack*/ "@/Pokemon/pages/PokemonPages"),
+    props: (route) => {
+      const id = Number(route.params.id);
+      return isNaN(id) ? { id: 1 } : { id };
+    },
+  },
 
   {
     path: "/:pathMatch(.*)*",
-    component: () => import(/*WebPack*/"@/shared/components/NoPagesFound"),
+    component: () => import(/*WebPack*/ "@/shared/components/NoPagesFound"),
+    // redirect:'/home'
   },
 ];
 
